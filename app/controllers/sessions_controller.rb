@@ -21,17 +21,16 @@ class SessionsController < ApplicationController
         end
       else
         flash[:error] = t(:incorrect_password_or_email)
-        
       end
     end
     # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
   
     def destroy
-       unless user_signed_in?
+      
       return unless user_signed_in?
   
       session.delete :user_id
       flash[:success] = t(:successfull_exit)
       
     end
-  end
+end

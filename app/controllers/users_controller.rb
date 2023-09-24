@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  # before_action :redirect_if_unsigned, except: [:new]
 
   # GET /users or /users.json
   def index
@@ -72,6 +73,10 @@ def create
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :surname, :birthday, :phone, :email, :password)
+      params.require(:user).permit!(:name, :surname, :birthday, :phone, :email, :password)
+    end
+
+    def redirect_if_unsigned
+      redirect_to "/login" unless user_signed_in?
     end
 end

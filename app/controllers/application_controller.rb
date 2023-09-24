@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     include ApplicationHelper
   
     around_action :switch_locale
-  
+    
     private
   
     def switch_locale(&action)
