@@ -1,0 +1,7 @@
+<h1> <%=t(:hi)%>, <%= @user.name %>! 👋≧◉ᴥ◉≦ </h1>
+
+<p>
+  <%=t(:thanks_for_registration)%>
+  <br/>
+  <%= link_to 'Confirm', confirm_email_user_url(@user.confirm_token, email: @user.email) %>
+</p>

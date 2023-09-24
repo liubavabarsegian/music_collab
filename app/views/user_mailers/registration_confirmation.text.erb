@@ -1,0 +1,4 @@
+Привет, <%= @user.name %>!
+
+Спасибо за регистрацию. Чтобы перейди, пройди по ссылке ниже :)
+<%= link_to 'Подвердить', confirm_email_user_url(@user.confirm_token, email: @user.email) %>
