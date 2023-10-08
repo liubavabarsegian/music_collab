@@ -1,6 +1,12 @@
 require "active_support/core_ext/integer/time"
+require 'dotenv/load'
 
 Rails.application.configure do
+
+  if ['development', 'test'].include? ENV['RAILS_ENV']
+    ENVS = Dotenv::Railtie.load
+    # Dotenv.load("/etc/environment")
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -78,12 +84,12 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    user_name:      ENV['MUSIC_COLLAB_GMAIL'],
-    password:       ENV['MUSIC_COLLAB_PASSWORD'],
+    user_name:      ENVS['MUSIC_COLLAB_GMAIL'],
+    password:       ENVS['MUSIC_COLLAB_PASSWORD'],
     domain:         'localhost:3000',
     address:        'smtp.gmail.com',
-    port:           '465',
+    port:           '587',
     authentication: :plain,
-    ssl: true
+    enable_starttls_auto: true
   }
 end

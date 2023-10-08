@@ -73,6 +73,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    byebug (11.1.3)
     capybara (3.39.2)
       addressable
       matrix
@@ -94,6 +95,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -228,9 +233,11 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootsnap
+  byebug
   capybara
   debug
   devise
+  dotenv-rails
   importmap-rails
   jbuilder
   pg (~> 1.1)

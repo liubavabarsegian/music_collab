@@ -78,7 +78,8 @@
 
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                      <li><%=button_to 'Моя анкета', edit_user_registration_path, class: "dropdown-item btn", method: :get, type: "button", id: "nav-myacc"%></li>
+                      <li><%= link_to 'Моя анкета', edit_user_path(current_user.id), method: :get, class: "dropdown-item btn", type: "button", id: "nav-myacc"%></li>
+                      <li><%=button_to 'Настройки', edit_user_registration_path, class: "dropdown-item btn", method: :get, type: "button", id: "nav-myacc"%></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-lg", id: "nav-logout"%></li>
                     </ul>
