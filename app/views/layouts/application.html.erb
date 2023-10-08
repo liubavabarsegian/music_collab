@@ -35,7 +35,7 @@
 
 
             <li class="nav-item">
-              <a class="nav-link" href="/month"><%=t(:calendar)%></a>
+              <a class="nav-link" href="/month"><%=t(:FindGroup)%></a>
             </li>
             <li class="nav-item" style="display:flex;">
               <a class="nav-link" href="/friends"><%=t(:FindMusician)%></a>
@@ -78,7 +78,7 @@
 
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                      <li><%=button_to 'Моя анкета', "/users/#{session[:user_id]}", class: "dropdown-item btn", method: :get, type: "button", id: "nav-myacc"%></li>
+                      <li><%=button_to 'Моя анкета', edit_user_registration_path, class: "dropdown-item btn", method: :get, type: "button", id: "nav-myacc"%></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-lg", id: "nav-logout"%></li>
                     </ul>
