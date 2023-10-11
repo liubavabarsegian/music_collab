@@ -2,9 +2,9 @@ require "active_support/core_ext/integer/time"
 require 'dotenv/load'
 
 Rails.application.configure do
+  ENVS = Dotenv::Railtie.load
 
   if ['development', 'test'].include? ENV['RAILS_ENV']
-    ENVS = Dotenv::Railtie.load
     # Dotenv.load("/etc/environment")
   end
   # Settings specified here will take precedence over those in config/application.rb.

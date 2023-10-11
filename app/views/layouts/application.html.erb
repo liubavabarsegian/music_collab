@@ -35,10 +35,10 @@
 
 
             <li class="nav-item">
-              <a class="nav-link" href="/month"><%=t(:FindGroup)%></a>
+              <a class="nav-link" href="/users"><%=t(:FindGroup)%></a>
             </li>
             <li class="nav-item" style="display:flex;">
-              <a class="nav-link" href="/friends"><%=t(:FindMusician)%></a>
+              <a class="nav-link" href="/users"><%=t(:FindMusician)%></a>
               <%# <%@requests = requests%>
               <%#<%if !@requests.empty?%>
               <%#  <img src="<%=asset_path('bell.png')%>" id = "red_bell">
@@ -78,7 +78,7 @@
 
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                      <li><%= link_to 'Моя анкета', edit_user_path(current_user.id), method: :get, class: "dropdown-item btn", type: "button", id: "nav-myacc"%></li>
+                      <li><%= link_to 'Моя анкета', user_path(current_user.id), method: :get, class: "dropdown-item btn", type: "button", id: "nav-myacc"%></li>
                       <li><%=button_to 'Настройки', edit_user_registration_path, class: "dropdown-item btn", method: :get, type: "button", id: "nav-myacc"%></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-lg", id: "nav-logout"%></li>
