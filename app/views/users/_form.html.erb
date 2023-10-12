@@ -42,6 +42,16 @@
   </div>
 
   <div>
+    <%= form.label :musician_instruments, style: "display: block" %>
+    <% MusicalInstrument.all.each do |instrument| %>
+      <label>
+        <%= check_box_tag "user[musical_instrument_ids][]", instrument.id, user.musical_instruments.include?(instrument) %>
+        <%= instrument.name %>
+      </label>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
