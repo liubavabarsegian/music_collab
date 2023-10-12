@@ -4,10 +4,12 @@
 
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+    <div id="<%= dom_id user %>" class = "user">
+      <%= render user %>
+      <p>
+        <%= link_to "Show this user", user %>
+      </p>
+    </div>
   <% end %>
 </div>
 
