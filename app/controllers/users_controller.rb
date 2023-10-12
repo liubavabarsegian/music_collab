@@ -4,6 +4,30 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+
+    if params[:musical_instrument_id].present?
+      @users = @users.joins(:musician_instruments).where("musician_instruments.instrument_id = ?", params[:musical_instrument_id])
+    end
+  
+    if params[:music_genre_id].present?
+      @users = @users.joins(:musician_genres).where("musician_genres.genre_id = ?", params[:music_genre_id])
+    end
+  
+    if params[:country_id].present?
+      @users = @users.where(country_id: params[:country_id])
+    end
+
+    if params[:region_id].present?
+      @users = @users.where(region_id: params[:region_id])
+    end
+
+    if params[:city_id].present?
+      @users = @users.where(city_id: params[:city_id])
+    end
+
+    if params[:has_concert_experience]
+      @users = @users.where(has_concert_experience: params[:has_concert_experience])
+    end
   end
 
   # GET /users/1 or /users/1.json
