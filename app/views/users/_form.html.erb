@@ -52,6 +52,16 @@
   </div>
 
   <div>
+    <%= form.label :music_genres, style: "display: block" %>
+    <% MusicGenre.all.each do |genre| %>
+      <label>
+        <%= check_box_tag "user[genre_ids][]", genre.id, user.genres.include?(genre) %>
+        <%= genre.name %>
+      </label>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.label :has_concert_experience, style: "display: block" %>
     <%= form.check_box :has_concert_experience %>
   </div>

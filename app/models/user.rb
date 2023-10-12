@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_one :region
   has_one :city
 
+  # создание связи [много-ко-многим] между музкантами и инструментами
   has_many :musician_instruments, foreign_key: 'musician_id'
   has_many :musical_instruments, through: :musician_instruments, source: :instrument
+
+  # создание связи [много-ко-многим] между музыкантами и предпочитаемыми ими жанрами
+  has_many :musician_genres, foreign_key: 'musician_id'
+  has_many :genres, through: :musician_genres, source: :genre
 end

@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Groups</h1>
+<div id="create_new_group">
+  <%= link_to "NEW GROUP", new_group_path, class: 'btn btn-dark'%>
+</div>
 
 <div id="groups">
   <% @groups.each do |group| %>
