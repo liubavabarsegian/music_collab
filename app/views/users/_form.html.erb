@@ -52,6 +52,16 @@
   </div>
 
   <div>
+    <%= form.label :has_concert_experience, style: "display: block" %>
+    <%= form.check_box :has_concert_experience %>
+  </div>
+
+  <div>
+    <%= form.label :career_start_year, style: "display: block" %>
+    <%= form.select :career_start_year, (Time.current.year - 100..Time.current.year).to_a.reverse, prompt: 'Select a year'  %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
