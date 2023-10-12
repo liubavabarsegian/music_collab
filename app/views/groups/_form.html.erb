@@ -37,6 +37,16 @@
   </div>
 
   <div>
+    <%= form.label :music_genres, style: "display: block" %>
+    <% MusicGenre.all.each do |genre| %>
+      <label>
+        <%= check_box_tag "group[genre_ids][]", genre.id, group.genres.include?(genre) %>
+        <%= genre.name %>
+      </label>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
