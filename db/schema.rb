@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_184131) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_13_182826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,14 +34,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_184131) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "group_instrument_requirements", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "instrument_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "group_memberships", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "musician_id"
+    t.integer "instrument_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.integer "leader"
     t.string "description"
-    t.integer "city"
     t.integer "members_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.integer "region_id"
+    t.integer "city_id"
   end
 
   create_table "music_genres", force: :cascade do |t|

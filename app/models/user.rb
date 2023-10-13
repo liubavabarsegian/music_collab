@@ -15,4 +15,6 @@ class User < ApplicationRecord
   # создание связи [много-ко-многим] между музыкантами и предпочитаемыми ими жанрами
   has_many :musician_genres, foreign_key: 'musician_id'
   has_many :genres, through: :musician_genres, source: :genre
+
+  has_many :group_memberships
 end

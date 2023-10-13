@@ -27,11 +27,6 @@
   </div>
 
   <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.number_field :city %>
-  </div>
-
-  <div>
     <%= form.label :members_number, style: "display: block" %>
     <%= form.number_field :members_number %>
   </div>
@@ -45,6 +40,12 @@
       </label>
     <% end %>
   </div>
+
+  <div id="instrument-requirements-container">
+    
+  </div>
+
+  <%= link_to "Add Instrument Requirement", "#", class: "add-instrument-requirement" %>
 
   <div>
     <%= form.submit %>

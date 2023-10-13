@@ -4,6 +4,36 @@ class GroupsController < ApplicationController
   # GET /groups or /groups.json
   def index
     @groups = Group.all
+
+    #TODO: надо создать какую-нибудь зависимость между группами и инструментами.
+    # например, инструмент <-> необходимое кол-во музыкантов, играющих на нем
+    if params[:musical_instrument_id].present?
+      # @groups = @groups.joins(:musician_instruments).where("musician_instruments.instrument_id = ?", params[:musical_instrument_id])
+    end
+  
+    if params[:music_genre_id].present?
+      @groups = @groups.joins(:group_genres).where("group_genres.genre_id = ?", params[:music_genre_id])
+    end
+  
+    if params[:country_id].present?
+      @groups = @groups.where(country_id: params[:country_id])
+    end
+
+    if params[:region_id].present?
+      @groups = @groups.where(region_id: params[:region_id])
+    end
+
+    if params[:city_id].present?
+      @groups = @groups.where(city_id: params[:city_id])
+    end
+
+    if params[:has_concert_experience]
+      @groups = @groups.where(has_concert_experience: params[:has_concert_experience])
+    end
+
+    if params[:user_id]
+      @groups = @groups.joins(:users).where('users.id = ?', params[:user_id])
+    end
   end
 
   # GET /groups/1 or /groups/1.json

@@ -1,0 +1,13 @@
+<div class="instrument-requirement-fields">
+  <div>
+    <%= form.label :instrument_id, "Instrument" %>
+    <%= form.collection_select(:instrument_id, MusicalInstrument.all, :id, :name, prompt: "Select an instrument") %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, "Quantity" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <%= link_to "Remove", "#", class: "remove-instrument-requirement"%>
+</div>
