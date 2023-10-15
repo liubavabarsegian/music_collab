@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :set_leader, only: [:create]
 
   # GET /groups or /groups.json
   def index
@@ -8,7 +9,7 @@ class GroupsController < ApplicationController
     #TODO: надо создать какую-нибудь зависимость между группами и инструментами.
     # например, инструмент <-> необходимое кол-во музыкантов, играющих на нем
     if params[:musical_instrument_id].present?
-      # @groups = @groups.joins(:musician_instruments).where("musician_instruments.instrument_id = ?", params[:musical_instrument_id])
+      @groups = @groups.joins(:group_memberships).where("group_memberships.instrument_id = ?", params[:musical_instrument_id])
     end
   
     if params[:music_genre_id].present?
@@ -32,8 +33,9 @@ class GroupsController < ApplicationController
     end
 
     if params[:user_id]
-      @groups = @groups.joins(:users).where('users.id = ?', params[:user_id])
+      @groups = @groups.joins(:group_memberships).where('group_memberships.musician_id = ?', params[:user_id])
     end
+
   end
 
   # GET /groups/1 or /groups/1.json
@@ -93,8 +95,13 @@ class GroupsController < ApplicationController
       @group = Group.find(params[:id])
     end
 
+    def set_leader
+      params.require(:group).merge!(leader_id: current_user.id)
+    end
+
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name, :leader, :description, :city, :members_number, genre_ids: [])
+      params.require(:group).permit(:name, :leader_id, :description, :city, :members_number,
+        group_genres_attributes: [:genre_id])
     end
 end

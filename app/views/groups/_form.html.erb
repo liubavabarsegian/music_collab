@@ -17,13 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :leader, style: "display: block" %>
-    <%= form.number_field :leader %>
-  </div>
-
-  <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description %>
   </div>
 
   <div>
@@ -35,7 +30,7 @@
     <%= form.label :music_genres, style: "display: block" %>
     <% MusicGenre.all.each do |genre| %>
       <label>
-        <%= check_box_tag "group[genre_ids][]", genre.id, group.genres.include?(genre) %>
+        <%= check_box_tag "group[group_genres_attributes][][genre_id]", genre.id, group.genres.include?(genre) %>
         <%= genre.name %>
       </label>
     <% end %>

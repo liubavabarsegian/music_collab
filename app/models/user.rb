@@ -17,4 +17,5 @@ class User < ApplicationRecord
   has_many :genres, through: :musician_genres, source: :genre
 
   has_many :group_memberships
+  has_many :leading_groups, foreign_key: 'leader_id', class_name: 'Group'
 end

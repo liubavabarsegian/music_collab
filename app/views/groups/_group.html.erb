@@ -6,7 +6,7 @@
 
   <p>
     <strong>Leader:</strong>
-    <%= group.leader %>
+    <%= group.leader.name %>
   </p>
 
   <p>
@@ -17,6 +17,15 @@
   <p>
     <strong>Members number:</strong>
     <%= group.members_number %>
+  </p>
+
+  <p>
+    <strong>Music Genres :</strong>
+    <ul>
+      <% group.genres.each do |genre| %>
+        <li><%= genre.name %></li>
+      <% end %>
+    </ul>
   </p>
 
 </div>

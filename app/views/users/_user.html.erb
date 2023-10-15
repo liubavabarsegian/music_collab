@@ -10,8 +10,33 @@
   </p>
 
   <p>
-    <strong>Birthday:</strong>
-    <%= user.birthday %>
+    <strong>Musical Instruments:</strong>
+    <ul>
+      <% user.musical_instruments.each do |instrument| %>
+        <li><%= instrument.name %></li>
+      <% end %>
+    </ul>
   </p>
+
+  <p>
+    <strong>Music Genres :</strong>
+    <ul>
+      <% user.genres.each do |genre| %>
+        <li><%= genre.name %></li>
+      <% end %>
+    </ul>
+  </p>
+
+  <p>
+    <strong>has_concert_experience:</strong>
+    <%= user.has_concert_experience %>
+  </p>
+
+  <p>
+    <strong>career start year:</strong>
+    <%= user.career_start_year %>
+  </p>
+
+  <%= link_to "Invite to Group" %>
 
 </div>
