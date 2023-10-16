@@ -18,4 +18,8 @@ class User < ApplicationRecord
 
   has_many :group_memberships
   has_many :leading_groups, foreign_key: 'leader_id', class_name: 'Group'
+
+  def leading_groups
+    @leading_groups = Group.all.where(leader_id: self.id)
+  end
 end

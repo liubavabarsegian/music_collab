@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+<h1 class='title'>Users</h1>
 
 <%= form_with(url: groups_path, method: "get", local: true) do |form| %>
   <div class="form-container">
@@ -38,9 +38,6 @@
   <% @users.each do |user| %>
     <div id="<%= dom_id user %>" class = "user">
       <%= render user %>
-      <p>
-        <%= link_to "Show this user", user %>
-      </p>
     </div>
   <% end %>
 </div>

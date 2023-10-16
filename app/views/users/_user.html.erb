@@ -37,6 +37,15 @@
     <%= user.career_start_year %>
   </p>
 
-  <%= link_to "Invite to Group" %>
-
+  <p>
+    <%= link_to "Show this user", user %>
+  </p>
+  <div class="dropdown">
+    <button class="dropbtn" for="btnControl">Invite to group</button>
+    <div class="dropdown-content">
+      <% current_user.leading_groups.each do |group|%>
+        <%= link_to group.name, '#'%>
+      <%end%>
+    </div>
+  </div>
 </div>

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root  'home#index'
 
   get   'welcome/index'
+  post  '/add_instrument_requirement', to: 'groups#add_instrument_requirement'
 end

@@ -89,6 +89,13 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_instrument_requirement
+    respond_to do |format|
+      # format.html         { render :add_instrument_requirement } # renders `page.html.erb`
+      format.turbo_stream { render 'groups/add_instrument_requirement' } # renders `page.turbo_stream.erb`
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

@@ -36,13 +36,27 @@
     <% end %>
   </div>
 
-  <div id="instrument-requirements-container">
-    
+  <!-- Leader's instrument -->
+  <div>
+    <%= form.collection_select(:instrument_ids, current_user.musical_instruments, :id, :name, { include_hidden: false }, multiple: false) %>
+    <%= form.label :instrument_ids, "Select Your Instrument" %>
   </div>
 
-  <%= link_to "Add Instrument Requirement", "#", class: "add-instrument-requirement" %>
+  <!-- Container for group instrument requirements -->
+  <div id="instrument-requirements">
+    <%= form.fields_for :group_instrument_requirements do |gir_form| %>
+      <%= render 'instrument_requirement', gir_form: gir_form %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to "Add Instrument Requirement", add_instrument_requirement_path(group:  group), method: :post, class: "add-instrument-requirement"%>
+  </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+  
+
