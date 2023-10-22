@@ -1,4 +1,6 @@
 <div class="instrument-requirement">
-  <%= gir_form.collection_select(:instrument_id, MusicalInstrument.all, :id, :name) %>
-  <%= gir_form.number_field :quantity %>
-</div>
+  <div class="instrument-requirement">
+    <%= gir_form.collection_select(:instrument_id, MusicalInstrument.all, :id, :name) %>
+    <%= gir_form.number_field :quantity %>
+  </div>
+</div> 

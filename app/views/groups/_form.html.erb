@@ -42,15 +42,13 @@
     <%= form.label :instrument_ids, "Select Your Instrument" %>
   </div>
 
-  <!-- Container for group instrument requirements -->
-  <div id="instrument-requirements">
-    <%= form.fields_for :group_instrument_requirements do |gir_form| %>
-      <%= render 'instrument_requirement', gir_form: gir_form %>
-    <% end %>
-  </div>
-
   <div>
-    <%= link_to "Add Instrument Requirement", add_instrument_requirement_path(group:  group), method: :post, class: "add-instrument-requirement"%>
+    <% MusicalInstrument.all.each do |instrument| %>
+      <div>
+        <%= form.label "", instrument.name %> 
+        <%= form.number_field "instrument_quantities[#{instrument.id}]" %>
+      </div>
+    <% end %>
   </div>
 
   <div>

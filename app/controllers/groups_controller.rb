@@ -53,10 +53,18 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
+    @group = Group.create(group_params)
 
     respond_to do |format|
-      if @group.save
+      if @group.valid?
+        instrument_quantities.each do |instrument_id, quantity|
+          GroupInstrumentRequirement.create!(
+            group_id: @group.id,
+            instrument_id: instrument_id,
+            quantity: quantity
+          ) unless quantity.blank?
+        end
+
         format.html { redirect_to group_url(@group), notice: "Group was successfully created." }
         format.json { render :show, status: :created, location: @group }
       else
@@ -91,8 +99,8 @@ class GroupsController < ApplicationController
 
   def add_instrument_requirement
     respond_to do |format|
-      # format.html         { render :add_instrument_requirement } # renders `page.html.erb`
-      format.turbo_stream { render 'groups/add_instrument_requirement' } # renders `page.turbo_stream.erb`
+      format.html         { render :add_instrument_requirement } # renders `page.html.erb`
+      format.turbo_stream { render :add_instrument_requirement } # renders `page.turbo_stream.erb`
     end
   end
 
@@ -110,5 +118,9 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(:name, :leader_id, :description, :city, :members_number,
         group_genres_attributes: [:genre_id])
+    end
+
+    def instrument_quantities
+      params.require(:group).require(:instrument_quantities).permit!
     end
 end

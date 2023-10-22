@@ -10,7 +10,7 @@ class Group < ApplicationRecord
   accepts_nested_attributes_for :group_genres
 
   has_many :group_instrument_requirements
-  has_many :instruments, through: :group_instrument_requirements, source: :instrument
+  has_many :required_instruments, through: :group_instrument_requirements, source: :instrument
 
   has_many :group_memberships
 end
