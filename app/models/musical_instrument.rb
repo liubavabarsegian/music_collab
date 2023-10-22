@@ -1,6 +1,4 @@
 class MusicalInstrument < ApplicationRecord
-  attr_accessor :name
-
   has_many :group_instrument_requirements
   has_many :groups, through: :group_instrument_requirements, source: :group
 
