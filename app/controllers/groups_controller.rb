@@ -104,6 +104,14 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_user_to_group
+    GroupMembership.create!(
+      group_id: user_to_group_params[:group_id],
+      musician_id: user_to_group_params[:musician_id],
+      instrument_id: MusicalInstrument.last.id
+    )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
@@ -122,5 +130,9 @@ class GroupsController < ApplicationController
 
     def instrument_quantities
       params.require(:group).require(:instrument_quantities).permit!
+    end
+
+    def user_to_group_params
+      params.permit(:group_id, :musician_id)
     end
 end

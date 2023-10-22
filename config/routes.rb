@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   get   'welcome/index'
   post  '/add_instrument_requirement', to: 'groups#add_instrument_requirement'
+  post  '/add_user_to_group', to: 'groups#add_user_to_group'
 end
