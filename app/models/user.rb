@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :email
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,6 +20,10 @@ class User < ApplicationRecord
 
   has_many :group_memberships
   has_many :leading_groups, foreign_key: 'leader_id', class_name: 'Group'
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[email]
+  end
 
   def leading_groups
     @leading_groups = Group.all.where(leader_id: self.id)

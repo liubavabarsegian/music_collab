@@ -38,7 +38,7 @@
 
   <!-- Leader's instrument -->
   <div>
-    <%= form.collection_select(:instrument_ids, current_user.musical_instruments, :id, :name, { include_hidden: false }, multiple: false) %>
+    <%= form.collection_select(:instrument_ids, current_user.musical_instruments, :id, :name, { include_hidden: false, prompt: '' }, multiple: false) %>
     <%= form.label :instrument_ids, "Select Your Instrument" %>
   </div>
 

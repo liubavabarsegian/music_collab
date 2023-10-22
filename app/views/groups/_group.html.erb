@@ -28,4 +28,13 @@
     </ul>
   </p>
 
+  <p>
+    <strong>Required instruments :</strong>
+    <ul>
+      <% group.required_instruments.each do |instrument| %>
+        <li><%= instrument.name %></li>
+      <% end %>
+    </ul>
+  </p>
+
 </div>
