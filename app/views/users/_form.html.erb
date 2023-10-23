@@ -12,37 +12,37 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label :name, "Имя", style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :surname, style: "display: block" %>
+    <%= form.label :surname, "Фамилия", style: "display: block" %>
     <%= form.text_field :surname %>
   </div>
 
   <div>
-    <%= form.label :birthday, style: "display: block" %>
+    <%= form.label :birthday, "Дата рождения", style: "display: block" %>
     <%= form.date_field :birthday %>
   </div>
 
   <div>
-    <%= form.label :country, style: "display: block"  %>
+    <%= form.label :country, "Страна", style: "display: block"  %>
     <%= form.collection_select(:country_id, Country.all, :id, :name) %>
   </div>
 
   <div>
-    <%= form.label :region, style: "display: block" %>
+    <%= form.label :region, "Регион", style: "display: block" %>
     <%= form.collection_select(:region_id, Region.all, :id, :name) %>
   </div>
 
   <div>
-    <%= form.label :city, style: "display: block" %>
+    <%= form.label :city, "Город",  style: "display: block" %>
     <%= form.collection_select(:city_id, City.all, :id, :name) %>
   </div>
 
   <div>
-    <%= form.label :musician_instruments, style: "display: block" %>
+    <%= form.label :musician_instruments, "Музыкальные инструменты", style: "display: block" %>
     <% MusicalInstrument.all.each do |instrument| %>
       <label>
         <%= check_box_tag "user[musical_instrument_ids][]", instrument.id, user.musical_instruments.include?(instrument) %>
@@ -52,7 +52,7 @@
   </div>
 
   <div>
-    <%= form.label :music_genres, style: "display: block" %>
+    <%= form.label :music_genres, "Жанры музыки", style: "display: block" %>
     <% MusicGenre.all.each do |genre| %>
       <label>
         <%= check_box_tag "user[genre_ids][]", genre.id, user.genres.include?(genre) %>
@@ -62,16 +62,16 @@
   </div>
 
   <div>
-    <%= form.label :has_concert_experience, style: "display: block" %>
+    <%= form.label :has_concert_experience, "Имеется концертный опыт", style: "display: block" %>
     <%= form.check_box :has_concert_experience %>
   </div>
 
   <div>
-    <%= form.label :career_start_year, style: "display: block" %>
+    <%= form.label :career_start_year, "Год начала музыкальной карьеры", style: "display: block" %>
     <%= form.select :career_start_year, (Time.current.year - 100..Time.current.year).to_a.reverse, prompt: 'Select a year'  %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Сохранить"%>
   </div>
 <% end %>

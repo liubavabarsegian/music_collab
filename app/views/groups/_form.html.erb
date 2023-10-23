@@ -12,22 +12,32 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label :name, "Название", style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
+    <%= form.label :description, "Описание",  style: "display: block" %>
     <%= form.text_area :description %>
   </div>
 
   <div>
-    <%= form.label :members_number, style: "display: block" %>
-    <%= form.number_field :members_number %>
+    <%= form.label :country, "Страна", style: "display: block"  %>
+    <%= form.collection_select(:country_id, Country.all, :id, :name) %>
   </div>
 
   <div>
-    <%= form.label :music_genres, style: "display: block" %>
+    <%= form.label :region, "Регион", style: "display: block" %>
+    <%= form.collection_select(:region_id, Region.all, :id, :name) %>
+  </div>
+
+  <div>
+    <%= form.label :city, "Город",  style: "display: block" %>
+    <%= form.collection_select(:city_id, City.all, :id, :name) %>
+  </div>
+
+  <div>
+    <%= form.label :music_genres, "Жанры музыки",  style: "display: block" %>
     <% MusicGenre.all.each do |genre| %>
       <label>
         <%= check_box_tag "group[group_genres_attributes][][genre_id]", genre.id, group.genres.include?(genre) %>
@@ -39,7 +49,7 @@
   <!-- Leader's instrument -->
   <div>
     <%= form.collection_select(:instrument_ids, current_user.musical_instruments, :id, :name, { include_hidden: false, prompt: '' }, multiple: false) %>
-    <%= form.label :instrument_ids, "Select Your Instrument" %>
+    <%= form.label :instrument_ids, "Ваш музыкальный инструмент" %>
   </div>
 
   <div>
@@ -53,7 +63,7 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Создать"%>
   </div>
 <% end %>
 

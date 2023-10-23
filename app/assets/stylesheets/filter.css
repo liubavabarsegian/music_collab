@@ -1,6 +1,5 @@
 /* Add this CSS to your stylesheet */
 
-
 /* Style the form container */
 .form-container {
     display: flex;
@@ -8,12 +7,14 @@
     justify-content: space-between;
     max-width: 800px;
     margin: 0 auto;
+    background-image: none;
   }
   
   /* Style the form sections */
   .form-section {
     flex-basis: calc(33.33% - 10px); /* Adjust the width as needed */
     margin: 5px;
+    background-image: none;
   }
   
   /* Style the labels and input fields */
@@ -21,6 +22,7 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    background-image: none;
   }
   
   .form-section select, .form-section input[type="text"] {
@@ -30,10 +32,12 @@
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.2s;
+    background-image: none;
   }
   
   .form-section select:focus, .form-section input[type="text"]:focus {
     border-color: #007bff; /* Change to your preferred focus color */
+    background-image: none;
   }
   
   /* Style the submit button */
@@ -46,16 +50,19 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.2s;
+    background-image: none;
   }
   
   .form-section input[type="submit"]:hover {
     background-color: #0056b3; /* Change to your preferred hover color */
+    background-image: none;
   }
   
   /* Adjust the "Filter" button specifically */
   .form-section input[type="submit"] {
     width: auto; /* Auto width based on content */
     margin: 0; /* Reset margin to fix button alignment */
+    background-image: none;
   }
   
   .clear-button {
@@ -67,8 +74,10 @@
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px; /* Adjust the margin as needed */
+    background-image: none;
   }
   
   .clear-button:hover {
     background-color: #92b0c2; /* Button background color on hover */
+    background-image: none;
   }

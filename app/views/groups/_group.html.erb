@@ -1,26 +1,21 @@
 <div id="<%= dom_id group %>">
   <p>
-    <strong>Name:</strong>
+    <strong>Название:</strong>
     <%= group.name %>
   </p>
 
   <p>
-    <strong>Leader:</strong>
+    <strong>Лидер:</strong>
     <%= group.leader.name %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong>Описание:</strong>
     <%= group.description %>
   </p>
 
   <p>
-    <strong>Members number:</strong>
-    <%= group.members_number %>
-  </p>
-
-  <p>
-    <strong>Music Genres :</strong>
+    <strong>Жанры музыки:</strong>
     <ul>
       <% group.genres.each do |genre| %>
         <li><%= genre.name %></li>
@@ -29,7 +24,7 @@
   </p>
 
   <p>
-    <strong>Required instruments :</strong>
+    <strong>Необходимые инструменты:</strong>
     <ul>
       <% group.required_instruments.each do |instrument| %>
         <li><%= instrument.name %></li>

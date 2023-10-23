@@ -19,7 +19,27 @@ h1
     text-align: center;
 }
 
+a
+{
+    text-decoration: none;
+}
+
 .groups
 {
     background-color: black;
+}
+
+button[type="submit"], button
+{
+    background-image: none;
+}
+
+button[type="submit"]:hover, button:hover
+{
+    background-image: none;
+}
+
+.btn, .btn:hover
+{
+    text-decoration: none;
 }

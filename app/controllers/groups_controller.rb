@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     #TODO: надо создать какую-нибудь зависимость между группами и инструментами.
     # например, инструмент <-> необходимое кол-во музыкантов, играющих на нем
     if params[:musical_instrument_id].present?
-      @groups = @groups.joins(:group_memberships).where("group_memberships.instrument_id = ?", params[:musical_instrument_id])
+      @groups = @groups.joins(:group_instrument_requirements).where("group_instrument_requirements.instrument_id = ?", params[:musical_instrument_id])
     end
   
     if params[:music_genre_id].present?

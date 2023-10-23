@@ -1,16 +1,16 @@
 <div id="<%= dom_id user %>">
   <p>
-    <strong>Name:</strong>
+    <strong>Имя:</strong>
     <%= user.name %>
   </p>
 
   <p>
-    <strong>Surname:</strong>
+    <strong>Фамилия:</strong>
     <%= user.surname %>
   </p>
 
   <p>
-    <strong>Musical Instruments:</strong>
+    <strong>Музыкальные инструменты</strong>
     <ul>
       <% user.musical_instruments.each do |instrument| %>
         <li><%= instrument.name %></li>
@@ -19,7 +19,7 @@
   </p>
 
   <p>
-    <strong>Music Genres :</strong>
+    <strong>Жанры музыки</strong>
     <ul>
       <% user.genres.each do |genre| %>
         <li><%= genre.name %></li>
@@ -28,24 +28,25 @@
   </p>
 
   <p>
-    <strong>has_concert_experience:</strong>
+    <strong>Имеется концертный опыт</strong>
     <%= user.has_concert_experience %>
   </p>
 
   <p>
-    <strong>career start year:</strong>
+    <strong>Год начала концертной карьеры</strong>
     <%= user.career_start_year %>
   </p>
 
   <p>
-    <%= link_to "Show this user", user %>
+    <%= link_to "Посмотреть этого пользователя", user %>
   </p>
   <div class="dropdown">
-    <button class="dropbtn" for="btnControl">Invite to group</button>
+    <button class="dropbtn" for="btnControl">Пригласить в группу</button>
     <div class="dropdown-content">
       <% current_user.leading_groups.each do |group|%>
         <%= button_to group.name, add_user_to_group_path({group_id: group.id, musician_id: user.id})%>
       <%end%>
     </div>
   </div>
+  <br><br>
 </div>

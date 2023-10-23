@@ -20,7 +20,7 @@
       <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
       <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="<%= asset_path('app_icon.png')%>" style="height:50px"></a>
-        <a class="navbar-brand" href="/"><%=t(:MusicCollab)%></a>
+        <a class="navbar-brand" href="/">Music Collab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,40 +31,23 @@
 
 
 
-
-
             <li class="nav-item">
-              <a class="nav-link" href="/groups"><%=t(:FindGroup)%></a>
+              <a class="nav-link" href="/groups">Найти группу</a>
             </li>
             <li class="nav-item" style="display:flex;">
-              <a class="nav-link" href="/users"><%=t(:FindMusician)%></a>
+              <a class="nav-link" href="/users">Найти музыканта</a>
               <%# <%@requests = requests%>
               <%#<%if !@requests.empty?%>
               <%#  <img src="<%=asset_path('bell.png')%>" id = "red_bell">
               <%#<%end%> 
             </li>
 
-
-
-
           </ul> 
           <%end%>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li id = "locals">
-                  <% if I18n.locale == :ru %>
-                    <img src="<%=asset_path('ru.png')%>",  style="height: 30px;">
-                    <%= link_to "RU", { :locale=>'en' }, class: "local" %>
-                  <% else %>
-                    <img src="", style="height: 30px;">
-                    <%= link_to "ENG", { :locale=>'ru' } , class: "local"%>
-                  <%end%>
-                </li>
                 <%if user_signed_in?%>
                   <li class="nav-item dropdown mr-auto">
-                    
-                    
-                    
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="nav-nick">
                       <img src="<%=asset_path('icon.png')%>",  style="height: 30px;">
                     </a>
