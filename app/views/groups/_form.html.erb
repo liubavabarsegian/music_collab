@@ -46,7 +46,8 @@
     <% MusicalInstrument.all.each do |instrument| %>
       <div>
         <%= form.label "", instrument.name %> 
-        <%= form.number_field "instrument_quantities[#{instrument.id}]" %>
+        <%= form.number_field "instrument_quantities[#{instrument.id}]",
+              value: form.object.group_instrument_requirements.find_by(instrument_id: instrument.id)&.quantity %>
       </div>
     <% end %>
   </div>
