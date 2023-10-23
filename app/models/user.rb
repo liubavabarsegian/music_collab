@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :async
 
-  belongs_to :country
-  belongs_to :region
-  belongs_to :city
+  belongs_to :country, optional: true
+  belongs_to :region, optional: true
+  belongs_to :city, optional: true
 
   # создание связи [много-ко-многим] между музкантами и инструментами
   has_many :musician_instruments, foreign_key: 'musician_id'

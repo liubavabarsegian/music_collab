@@ -44,7 +44,7 @@
     <button class="dropbtn" for="btnControl">Пригласить в группу</button>
     <div class="dropdown-content">
       <% current_user.leading_groups.each do |group|%>
-        <%= button_to group.name, add_user_to_group_path({group_id: group.id, musician_id: user.id})%>
+        <%= button_to group.name, send_invitation_mail_path({group_id: group.id, musician_id: user.id})%>
       <%end%>
     </div>
   </div>

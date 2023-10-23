@@ -1,2 +1,3 @@
-You are invited to join a group. Click the following link to accept the invitation:
-<%# <%=  accept_invitation_url(@invitation, token: @token) %> %>
+<h1> Вы были приглашены в группу <%= @group.name %></h1>
+<p> Для вступления в группу нужно перейти по ссылке</p>
+<p><%= link_to 'Принять приглашение', join_group_url(group_id: @group.id, musician_id: @musician.id), target: "_blank" %></p>

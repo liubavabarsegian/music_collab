@@ -104,12 +104,29 @@ class GroupsController < ApplicationController
     end
   end
 
+  def send_invitation_mail
+    invitation = Invitation.create!(
+      group_id: user_to_group_params[:group_id],
+      musician_id: user_to_group_params[:musician_id],
+      token: SecureRandom.uuid
+    )
+
+    InvitationToGroupMailer.invite_user_to_group(invitation).deliver
+  end
+
+  def join_group
+    @group = Group.find(user_to_group_params[:group_id])
+    @musician = User.find(user_to_group_params[:musician_id])
+    @token = user_to_group_params[:token]
+  end
+
   def add_user_to_group
     GroupMembership.create!(
       group_id: user_to_group_params[:group_id],
       musician_id: user_to_group_params[:musician_id],
       instrument_id: MusicalInstrument.last.id
     )
+    redirect_to group_path(user_to_group_params[:group_id])
   end
 
   private
@@ -133,6 +150,6 @@ class GroupsController < ApplicationController
     end
 
     def user_to_group_params
-      params.permit(:group_id, :musician_id)
+      params.permit(:group_id, :musician_id, :token)
     end
 end
