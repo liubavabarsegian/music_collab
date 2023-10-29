@@ -122,9 +122,37 @@ class GroupsController < ApplicationController
     GroupMembership.create!(
       group_id: user_to_group_params[:group_id],
       musician_id: user_to_group_params[:musician_id],
-      instrument_id: MusicalInstrument.last.id
+      instrument_id:  user_to_group_params[:instrument_id]
     )
     redirect_to group_path(user_to_group_params[:group_id])
+  end
+
+  def musician_request
+    @group = Group.find(request_params[:group_id])
+  end
+
+  def send_request
+    request = Request.create!(
+      group_id: user_to_group_params[:group_id],
+      musician_id: user_to_group_params[:musician_id],
+      instrument_id:  user_to_group_params[:instrument_id],
+      status: 'pending'
+    )
+
+    RequestToGroupMailer.send_request(request).deliver
+    redirect_to group_path(user_to_group_params[:group_id])
+  end
+
+  def view_request
+
+  end
+
+  def accept_request
+
+  end
+
+  def decline_request
+
   end
 
   private
@@ -153,6 +181,10 @@ class GroupsController < ApplicationController
 
     def leader_instrument_id
       params.permit(:leader_instrument_id)
+    end
+
+    def request_params
+      params.permit(:group_id)
     end
 
     def create_instrument_requirements
