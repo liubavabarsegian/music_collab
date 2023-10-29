@@ -72,6 +72,9 @@ group :development, :test do
 
   gem 'dotenv-rails', require: 'dotenv/rails-now'
 
+  gem 'guard', require: false
+  
+  gem 'guard-livereload', require: false
 end
 
 group :development do

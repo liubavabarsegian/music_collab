@@ -57,13 +57,8 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.valid?
-        instrument_quantities.each do |instrument_id, quantity|
-          GroupInstrumentRequirement.create!(
-            group_id: @group.id,
-            instrument_id: instrument_id,
-            quantity: quantity
-          ) unless quantity.blank?
-        end
+        create_instrument_requirements
+        set_leader_as_musician
 
         format.html { redirect_to group_url(@group), notice: "Group was successfully created." }
         format.json { render :show, status: :created, location: @group }
@@ -78,6 +73,9 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
+        delete_instrument_requirements
+        create_instrument_requirements
+
         format.html { redirect_to group_url(@group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -141,7 +139,7 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name, :leader_id, :description, :city, :members_number,
+      params.require(:group).permit(:name, :leader_id, :description, :country_id, :region_id, :city_id, 
         group_genres_attributes: [:genre_id])
     end
 
@@ -151,5 +149,37 @@ class GroupsController < ApplicationController
 
     def user_to_group_params
       params.permit(:group_id, :musician_id, :token)
+    end
+
+    def leader_instrument_id
+      params.permit(:leader_instrument_id)
+    end
+
+    def create_instrument_requirements
+      instrument_quantities.each do |instrument_id, quantity|
+        GroupInstrumentRequirement.create!(
+          group_id: @group.id,
+          instrument_id: instrument_id,
+          quantity: quantity
+        ) unless quantity.blank?
+      end
+    end
+
+    def delete_instrument_requirements
+      GroupInstrumentRequirement.where(group_id: @group.id)&.delete_all
+    end
+
+    def set_leader_as_musician
+      if leader_instrument_id.present?
+        GroupMembership.create!(
+          group_id: @group.id,
+          instrument_id: MusicalInstrument.find(leader_instrument_id),
+          musician_id: current_user.id
+        )
+      end
+    end
+
+    def delete_leader_from_musicians
+      GroupMembership.find_by(group_id: @group.id, musician_id: current_user.id)&.delete
     end
 end

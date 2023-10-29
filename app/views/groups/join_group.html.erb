@@ -3,9 +3,11 @@
 <%= form_with(url: '/add_user_to_group', method: "post") do |form| %>
   <div class="form-container">
     <div>
-      <%= form.collection_select(:instrument_ids, current_user.musical_instruments, :id, :name, { include_hidden: false, prompt: '' }, multiple: false) %>
-      <%= form.label :instrument_ids, "Ваш музыкальный инструмент" %>
+      <%= form.collection_select(:instrument_id, current_user.musical_instruments, :id, :name, { include_hidden: false, prompt: '' }, multiple: false) %>
+      <%= form.label :instrument_id, "Ваш музыкальный инструмент" %>
     </div>
+    <%= form.hidden_field :musician_id, value: @musician.id %>
+    <%= form.hidden_field :group_id, value: @group.id %>
     <%= form.submit "Принять приглашение" %>
   </div>
 <% end %>
