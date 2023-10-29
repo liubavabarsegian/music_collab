@@ -1,0 +1,49 @@
+<div>
+    <h3>Музыкант <%= @request.musician.name%> хочет вступить в вашу группу <%= @request.group.name%> на должность "<%= @request.instrument.name%>"</h3>
+
+    <p> Подробная информация о музыканте: </p>
+    <div class = "user">
+        <% user = @request.musician%>
+        <p>
+            <strong>Имя:</strong>
+            <%= user.name %>
+        </p>
+
+        <p>
+            <strong>Фамилия:</strong>
+            <%= user.surname %>
+        </p>
+
+        <p>
+            <strong>Музыкальные инструменты</strong>
+            <ul>
+            <% user.musical_instruments.each do |instrument| %>
+                <li><%= instrument.name %></li>
+            <% end %>
+            </ul>
+        </p>
+
+        <p>
+            <strong>Жанры музыки</strong>
+            <ul>
+            <% user.genres.each do |genre| %>
+                <li><%= genre.name %></li>
+            <% end %>
+            </ul>
+        </p>
+
+        <p>
+            <strong>Имеется концертный опыт</strong>
+            <%= user.has_concert_experience %>
+        </p>
+
+        <p>
+            <strong>Год начала концертной карьеры</strong>
+            <%= user.career_start_year %>
+        </p>
+    </div>
+</div>
+<div class='decision'>
+    <%= button_to "Принять в группу", requests_accept_path({id: @request.id}), type: 'button', class: 'accept-btn'%>
+    <%= button_to "Отказать", requests_deny_path({id: @request.id}), type: 'button', class: 'deny-btn'%>
+</div>

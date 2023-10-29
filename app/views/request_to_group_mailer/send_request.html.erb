@@ -1,3 +1,3 @@
-<h1> В вашу группу <%= @group.name %> был отправлен запрос на вступление.</h1>
+<h1> Пользователь <%= @musician.name%> отправил запрос на вступление в вашу группу <%= @group.name %> </h1>
 <p>Для просмотра заявки перейдите по ссылке</p>
-<p><%= link_to 'посмотреть заявку', view_request_url(group_id: @group.id, musician_id: @musician.id), target: "_blank" %></p>
+<p><%= link_to 'посмотреть заявку', requests_show_url(id: @request.id), target: "_blank" %></p>

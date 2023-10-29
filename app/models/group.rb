@@ -12,7 +12,8 @@ class Group < ApplicationRecord
   has_many :group_instrument_requirements
   has_many :required_instruments, through: :group_instrument_requirements, source: :instrument
 
-  has_many :group_memberships
+  has_many :memberships, class_name: 'GroupMembership'
+  has_many :musicians, through: :memberships, source: :musician
 
   def self.ransackable_attributes(auth_object = nil)
     %w[id name leader_id city_id]

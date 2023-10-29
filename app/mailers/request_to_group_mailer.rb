@@ -8,7 +8,7 @@ class RequestToGroupMailer < ApplicationMailer
     @musician = request.musician
 
     begin
-      mail(to: request.musician.email, subject: 'Приглашение на вступление в группу')
+      mail(to: request.group.leader.email, subject: 'Приглашение на вступление в группу')
     rescue StandardError => e
       Rails.logger.error("Error sending email: #{e.message}")
     end

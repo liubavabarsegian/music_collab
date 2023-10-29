@@ -32,4 +32,14 @@
     </ul>
   </p>
 
+  <p>Состав:</p>
+  <ul>
+    <% group.memberships.each do |membership| %>
+      <li><%= membership.musician.name %> - <%= membership.instrument.name%></li>
+    <% end %>
+  </ul>
+
+  <p>
+    <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
+  </p>
 </div>

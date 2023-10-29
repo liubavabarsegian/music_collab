@@ -1,0 +1,29 @@
+.decision {
+    display: flex;
+}
+
+.accept-btn, .deny-btn {
+    margin: 10px;
+	padding: 20px 40px;
+	border: none;
+	cursor: pointer;
+}
+
+.accept-btn{
+	background: #439368;
+	box-shadow: inset 0px 0px 0px 0px #105d36;
+	transition: all 0.5s ease-in-out;
+}
+.accept-btn:hover{
+	box-shadow: inset 0px -200px 0px 0px #105d36;
+}
+
+.deny-btn{
+	background: #e78484;
+	box-shadow: inset 0px 0px 0px 0px #ab3939;
+	transition: all 0.5s ease-in-out;
+}
+
+.deny-btn:hover{
+	box-shadow: inset 0px -200px 0px 0px #ab3939;
+}
