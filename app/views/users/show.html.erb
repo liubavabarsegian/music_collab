@@ -3,7 +3,7 @@
 <%= render @user %>
 
 <div>
-  <%if current_user.id == @user.id%>
+  <%if current_user&.id == @user.id%>
     <%= link_to "Редактировать анкету", edit_user_path(@user) %> |
   <%end%>
   <%= link_to "Вернуться к просмотру музыкантов", users_path %>

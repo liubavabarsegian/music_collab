@@ -42,7 +42,7 @@
 <%end%>
 
 <div id="groups">
-  <% @groups.each do |group| %>
+  <% @groups&.each do |group| %>
     <div id="<%= dom_id group %>" class = "group">
       <div id="<%= dom_id group %>">
         <p>

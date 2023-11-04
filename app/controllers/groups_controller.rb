@@ -30,10 +30,6 @@ class GroupsController < ApplicationController
       @groups = @groups.where(city_id: params[:city_id])
     end
 
-    if params[:has_concert_experience]
-      @groups = @groups.where(has_concert_experience: params[:has_concert_experience])
-    end
-
     if params[:user_id]
       @groups = @groups.joins(:memberships).where('group_memberships.musician_id = ?', params[:user_id])
     end
