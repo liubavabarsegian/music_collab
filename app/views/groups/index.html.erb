@@ -10,6 +10,22 @@
   <%end%>
 </div>
 
+<%if params[:user_id]%>
+  <h3>Группы, собранные Вами</h3>
+  <div id="leading-groups">
+    <% current_user.leading_groups&.each do |group| %>
+      <div id="<%= dom_id group %>" class = "group">
+        <div id="<%= dom_id group %>">
+          <%= render 'index_partial', group: group %>
+        </div>
+        <p>
+          <%= link_to "Подробнее", group %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<%end%>
+
 <% unless params[:hide_filters]%>
   <%= form_with(url: groups_path, method: "get", local: true) do |form| %>
     <div class="form-container">
@@ -41,42 +57,15 @@
   <% end %>
 <%end%>
 
+<%if params[:user_id]%>
+  <h3>Группы, в которых вы являетесь музыкантом</h3>
+<%end%>
 <div id="groups">
   <% @groups&.each do |group| %>
     <div id="<%= dom_id group %>" class = "group">
       <div id="<%= dom_id group %>">
-        <p>
-          <strong>Название:</strong>
-          <%= group.name %>
-        </p>
-
-        <p>
-          <strong>Музыкальные жанры:</strong>
-          <ul>
-            <% group.genres.each do |genre| %>
-              <li><%= genre.name %></li>
-            <% end %>
-          </ul>
-        </p>
-
-        <p>
-          <strong>Необходимые инструменты:</strong>
-          <ul>
-            <% group.group_instrument_requirements.each do |requirement| %>
-              <li><%= requirement.instrument.name %> - <%= requirement.quantity%></li>
-            <% end %>
-          </ul>
-        </p>
-
-        <p>
-          <% if user_signed_in? %>
-            <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
-          <%else%>
-            <%= link_to 'Вступить в группу', new_user_session_path, method: :get%>
-          <%end%>
-        </p>
+        <%= render 'index_partial', group: group %>
       </div>
-
       <p>
         <%= link_to "Подробнее", group %>
       </p>

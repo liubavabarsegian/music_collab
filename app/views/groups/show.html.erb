@@ -3,8 +3,12 @@
 <%= render @group %>
 
 <div>
-  <%= link_to "Редактировать группу", edit_group_path(@group) %> |
+  <%if current_user.id == @group.leader_id%>
+    <%= link_to "Редактировать группу", edit_group_path(@group) %> |
+  <%end%>
   <%= link_to "Вернуться к просмотру групп", groups_path %>
 
-  <%= button_to "Удалить группу", @group, method: :delete %>
+  <%if current_user.id == @group.leader_id%>
+    <%= button_to "Расформировать группу", @group, method: :delete %>
+  <%end%>
 </div>

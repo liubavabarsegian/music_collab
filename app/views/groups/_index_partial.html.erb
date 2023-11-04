@@ -1,43 +1,25 @@
-<div id="<%= dom_id group %>">
-  <p>
-    <strong>Название:</strong>
-    <%= group.name %>
-  </p>
+<p>
+  <strong>Название:</strong>
+  <%= group.name %>
+</p>
 
-  <p>
-    <strong>Лидер:</strong>
-    <%= group.leader.name %>
-  </p>
-
-  <p>
-    <strong>Описание:</strong>
-    <%= group.description %>
-  </p>
-
-  <p>
-    <strong>Музыкальные жанры:</strong>
+<p>
+  <strong>Музыкальные жанры:</strong>
     <ul>
       <% group.genres.each do |genre| %>
         <li><%= genre.name %></li>
       <% end %>
     </ul>
-  </p>
+</p>
 
-  <p>
-    <strong>Необходимые инструменты:</strong>
+<p>
+  <strong>Необходимые инструменты:</strong>
     <ul>
-      <% group.group_instrument_requirements.each do |requirement| %>
+  <% group.group_instrument_requirements.each do |requirement| %>
         <li><%= requirement.instrument.name %> - <%= requirement.quantity%></li>
-      <% end %>
-    </ul>
-  </p>
-
-  <p>Состав:</p>
-  <ul>
-    <% group.memberships.each do |membership| %>
-      <li><%= membership.musician.name %> - <%= membership.instrument.name%></li>
     <% end %>
   </ul>
+</p>
 
 <p>
   <%is_member = GroupMembership.where(group_id: group.id, musician_id: current_user.id).present? %>
@@ -49,5 +31,3 @@
     <%= link_to 'Вступить в группу', new_user_session_path, method: :get%>
   <%end%>
 </p>
-
-</div>

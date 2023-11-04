@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :validate_user_pressence, except: [:index]
   before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :validate_group_leader, only: [:edit, :update, :destroy]
   before_action :set_leader, only: [:create]
   before_action :delete_music_genres, only: :update
 
@@ -115,6 +116,10 @@ class GroupsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
+    end
+
+    def validate_group_leader
+      redirect_to root_path unless @group.leader_id != current_user.id
     end
 
     def set_leader
