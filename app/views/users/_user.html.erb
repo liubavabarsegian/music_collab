@@ -19,7 +19,7 @@
   </p>
 
   <p>
-    <strong>Жанры музыки</strong>
+    <strong>Музыкальные жанры</strong>
     <ul>
       <% user.genres.each do |genre| %>
         <li><%= genre.name %></li>
@@ -37,16 +37,14 @@
     <%= user.career_start_year %>
   </p>
 
-  <p>
-    <%= link_to "Посмотреть этого пользователя", user %>
-  </p>
-  <div class="dropdown">
-    <button class="dropbtn" for="btnControl">Пригласить в группу</button>
-    <div class="dropdown-content">
-      <% current_user.leading_groups.each do |group|%>
-        <%= button_to group.name, send_invitation_mail_path({group_id: group.id, musician_id: user.id})%>
-      <%end%>
+  <%if user_signed_in? && current_user.id != user.id%>
+    <div class="dropdown">
+      <button class="dropbtn" for="btnControl">Пригласить в группу</button>
+      <div class="dropdown-content">
+        <% current_user.leading_groups.each do |group|%>
+          <%= button_to group.name, send_invitation_mail_path({group_id: group.id, musician_id: user.id})%>
+        <%end%>
+      </div>
     </div>
-  </div>
-  <br><br>
+  <%end%>
 </div>

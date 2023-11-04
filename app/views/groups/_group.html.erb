@@ -15,7 +15,7 @@
   </p>
 
   <p>
-    <strong>Жанры музыки:</strong>
+    <strong>Музыкальные жанры:</strong>
     <ul>
       <% group.genres.each do |genre| %>
         <li><%= genre.name %></li>
@@ -26,8 +26,8 @@
   <p>
     <strong>Необходимые инструменты:</strong>
     <ul>
-      <% group.required_instruments.each do |instrument| %>
-        <li><%= instrument.name %></li>
+      <% group.group_instrument_requirements.each do |requirement| %>
+        <li><%= requirement.instrument.name %> - <%= requirement.quantity%></li>
       <% end %>
     </ul>
   </p>
@@ -40,6 +40,10 @@
   </ul>
 
   <p>
-    <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
+    <% if user_signed_in? %>
+      <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
+    <%else%>
+      <%= link_to 'Вступить в группу', new_user_session_path, method: :get%>
+    <%end%>
   </p>
 </div>

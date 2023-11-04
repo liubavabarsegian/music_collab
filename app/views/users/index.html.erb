@@ -37,9 +37,57 @@
 <div id="users">
   <% @users.each do |user| %>
     <div id="<%= dom_id user %>" class = "user">
-      <%= render user %>
+        <p>
+          <strong>Имя:</strong>
+          <%= user.name %>
+        </p>
+
+        <p>
+          <strong>Фамилия:</strong>
+          <%= user.surname %>
+        </p>
+
+        <p>
+          <strong>Музыкальные инструменты</strong>
+          <ul>
+            <% user.musical_instruments.each do |instrument| %>
+              <li><%= instrument.name %></li>
+            <% end %>
+          </ul>
+        </p>
+
+        <p>
+          <strong>Музыкальные жанры</strong>
+          <ul>
+            <% user.genres.each do |genre| %>
+              <li><%= genre.name %></li>
+            <% end %>
+          </ul>
+        </p>
+
+        <p>
+          <strong>Имеется концертный опыт</strong>
+          <%= user.has_concert_experience %>
+        </p>
+
+        <p>
+          <strong>Год начала концертной карьеры</strong>
+          <%= user.career_start_year %>
+        </p>
+
+        <p>
+          <%= link_to "Посмотреть этого пользователя", user %>
+        </p>
+        <%if user_signed_in? && current_user.id != user.id%>
+          <div class="dropdown">
+            <button class="dropbtn" for="btnControl">Пригласить в группу</button>
+            <div class="dropdown-content">
+              <% current_user.leading_groups.each do |group|%>
+                <%= button_to group.name, send_invitation_mail_path({group_id: group.id, musician_id: user.id})%>
+              <%end%>
+            </div>
+          </div>
+        <%end%>
     </div>
   <% end %>
 </div>
-
-<%= link_to "New user", new_user_path %>

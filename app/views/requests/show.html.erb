@@ -1,9 +1,9 @@
 <div>
-    <h3>Музыкант <%= @request.musician.name%> хочет вступить в вашу группу <%= @request.group.name%> на должность "<%= @request.instrument.name%>"</h3>
+    <h3>Музыкант <%= @request&.musician&.name%> хочет вступить в вашу группу <%= @request&.group&.name%> на должность "<%= @request&.instrument&.name%>"</h3>
 
     <p> Подробная информация о музыканте: </p>
     <div class = "user">
-        <% user = @request.musician%>
+        <% user = @request&.musician%>
         <p>
             <strong>Имя:</strong>
             <%= user.name %>
@@ -24,7 +24,7 @@
         </p>
 
         <p>
-            <strong>Жанры музыки</strong>
+            <strong>Музыкальные жанры</strong>
             <ul>
             <% user.genres.each do |genre| %>
                 <li><%= genre.name %></li>

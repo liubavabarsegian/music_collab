@@ -1,4 +1,4 @@
-class InvitationsController
+class InvitationsController < ApplicationController
   def join_group
     @group = Group.find(invitation_params[:group_id])
     @musician = User.find(invitation_params[:musician_id])

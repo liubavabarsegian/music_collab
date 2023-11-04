@@ -3,47 +3,83 @@
 <h1>Группы</h1>
 
 <div id="create_new_group">
-  <%= link_to "Собрать группу", new_group_path, class: 'btn glow-on-hover', style:'color:white;font-size:18px'%>
+  <%if user_signed_in?%>
+    <%= link_to "Собрать группу", new_group_path, class: 'btn glow-on-hover', style:'color:white;font-size:18px'%>
+  <%else%>
+    <%= link_to "Собрать группу", new_user_session_path, class: 'btn glow-on-hover', style:'color:white;font-size:18px'%>
+  <%end%>
 </div>
 
-<%= form_with(url: groups_path, method: "get", local: true) do |form| %>
-  <div class="form-container">
-    <div class="form-section">
-      <%= form.label :musical_instrument_id, "Музыкальный инструмент" %>
-      <%= form.collection_select :musical_instrument_id, MusicalInstrument.all, :id, :name, prompt: "" %>
+<% unless params[:hide_filters]%>
+  <%= form_with(url: groups_path, method: "get", local: true) do |form| %>
+    <div class="form-container">
+      <div class="form-section">
+        <%= form.label :musical_instrument_id, "Музыкальный инструмент" %>
+        <%= form.collection_select :musical_instrument_id, MusicalInstrument.all, :id, :name, prompt: "" %>
+      </div>
+      <div class="form-section">
+        <%= form.label :music_genre_id, "Жанр музыки" %>
+        <%= form.collection_select :music_genre_id, MusicGenre.all, :id, :name, prompt: "" %>
+      </div>
+      <div class="form-section">
+        <%= form.label :country_id, "Страна" %>
+        <%= form.collection_select :country_id, Country.all, :id, :name, prompt: "" %>
+      </div>
+      <div class="form-section">
+        <%= form.label :region_id, "Регион" %>
+        <%= form.collection_select :region_id, Region.all, :id, :name, prompt: "" %>
+      </div>
+      <div class="form-section">
+        <%= form.label :city_id, "Город" %>
+        <%= form.collection_select :city_id, City.all, :id, :name, prompt: "" %>
+      </div>
+      <div class="form-section">
+        <%= form.submit "Найти", class: 'filter-button' %>
+        <%= button_tag "Сбросить", type: 'reset', class: 'filter-button btn clear-button' %>
+      </div>
     </div>
-    <div class="form-section">
-      <%= form.label :music_genre_id, "Жанр музыки" %>
-      <%= form.collection_select :music_genre_id, MusicGenre.all, :id, :name, prompt: "" %>
-    </div>
-    <div class="form-section">
-      <%= form.label :country_id, "Страна" %>
-      <%= form.collection_select :country_id, Country.all, :id, :name, prompt: "" %>
-    </div>
-    <div class="form-section">
-      <%= form.label :region_id, "Регион" %>
-      <%= form.collection_select :region_id, Region.all, :id, :name, prompt: "" %>
-    </div>
-    <div class="form-section">
-      <%= form.label :city_id, "Город" %>
-      <%= form.collection_select :city_id, City.all, :id, :name, prompt: "" %>
-    </div>
-    <div class="form-section">
-      <%= form.submit "Найти", class: 'filter-button' %>
-      <%= button_tag "Сбросить", type: 'reset', class: 'filter-button btn clear-button' %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+<%end%>
 
 <div id="groups">
   <% @groups.each do |group| %>
     <div id="<%= dom_id group %>" class = "group">
-      <%= render group %>
+      <div id="<%= dom_id group %>">
+        <p>
+          <strong>Название:</strong>
+          <%= group.name %>
+        </p>
+
+        <p>
+          <strong>Музыкальные жанры:</strong>
+          <ul>
+            <% group.genres.each do |genre| %>
+              <li><%= genre.name %></li>
+            <% end %>
+          </ul>
+        </p>
+
+        <p>
+          <strong>Необходимые инструменты:</strong>
+          <ul>
+            <% group.group_instrument_requirements.each do |requirement| %>
+              <li><%= requirement.instrument.name %> - <%= requirement.quantity%></li>
+            <% end %>
+          </ul>
+        </p>
+
+        <p>
+          <% if user_signed_in? %>
+            <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
+          <%else%>
+            <%= link_to 'Вступить в группу', new_user_session_path, method: :get%>
+          <%end%>
+        </p>
+      </div>
+
       <p>
         <%= link_to "Подробнее", group %>
       </p>
     </div>
   <% end %>
 </div>
-
-<%= link_to "Собрать группу", new_group_path %>

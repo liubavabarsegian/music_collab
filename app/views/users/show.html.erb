@@ -3,8 +3,8 @@
 <%= render @user %>
 
 <div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <%if current_user.id == @user.id%>
+    <%= link_to "Редактировать анкету", edit_user_path(@user) %> |
+  <%end%>
+  <%= link_to "Вернуться к просмотру музыкантов", users_path %>
 </div>

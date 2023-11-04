@@ -1,6 +1,8 @@
 class GroupsController < ApplicationController
+  before_action :validate_user_pressence, except: [:index]
   before_action :set_group, only: %i[ show edit update destroy ]
   before_action :set_leader, only: [:create]
+  before_action :delete_music_genres, only: :update
 
   # GET /groups or /groups.json
   def index
@@ -33,7 +35,7 @@ class GroupsController < ApplicationController
     end
 
     if params[:user_id]
-      @groups = @groups.joins(:group_memberships).where('group_memberships.musician_id = ?', params[:user_id])
+      @groups = @groups.joins(:memberships).where('group_memberships.musician_id = ?', params[:user_id])
     end
 
   end
@@ -153,6 +155,10 @@ class GroupsController < ApplicationController
 
     def delete_instrument_requirements
       GroupInstrumentRequirement.where(group_id: @group.id)&.delete_all
+    end
+
+    def delete_music_genres
+      GroupGenre.where(group_id: @group.id)&.delete_all
     end
 
     def set_leader_as_musician

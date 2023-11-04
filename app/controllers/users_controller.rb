@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :validate_user_pressence, except: [:index, :show]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -27,6 +28,10 @@ class UsersController < ApplicationController
 
     if params[:has_concert_experience]
       @users = @users.where(has_concert_experience: params[:has_concert_experience])
+    end
+
+    if user_signed_in?
+      @users = @users.where('id <> ?', current_user.id)
     end
   end
 
