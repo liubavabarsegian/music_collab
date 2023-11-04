@@ -37,6 +37,14 @@
     <%= user.career_start_year %>
   </p>
 
+  <div>
+    <% if user.video.attached? %>
+      <video width="320" height="240" controls>
+        <source src="<%= rails_blob_path(user.video) %>" type="<%= user.video.content_type %>">
+      </video>
+    <% end %>
+  </div>
+
   <%if user_signed_in? && current_user.id != user.id%>
     <div class="dropdown">
       <button class="dropbtn" for="btnControl">Пригласить в группу</button>

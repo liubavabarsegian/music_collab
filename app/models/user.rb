@@ -20,6 +20,9 @@ class User < ApplicationRecord
   has_many :memberships, class_name: 'GroupMembership'
   has_many :leading_groups, foreign_key: 'leader_id', class_name: 'Group'
 
+  has_one_attached :video
+
+  attr_accessor :delete_video
   def self.ransackable_attributes(auth_object = nil)
     %w[id name surname email has_concert_experience career_start_year city_id]
   end

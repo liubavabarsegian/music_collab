@@ -72,6 +72,16 @@
   </div>
 
   <div>
+    <%= form.label :video, "Загрузить видео", style: "display: block" %>
+    <%= form.file_field :video %>
+  </div>
+
+  <div>
+    <%= form.label :delete_video, "Удалить видеo", style: "display: block" %>
+    <%= form.check_box :delete_video %>
+  </div>
+
+  <div>
     <%= form.submit "Сохранить"%>
   </div>
 <% end %>

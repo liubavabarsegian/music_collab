@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :validate_user_pressence, except: [:index, :show]
   before_action :set_user, only: %i[ show edit update destroy ]
+  after_action  :delete_video, only: [:create, :update]
 
   # GET /users or /users.json
   def index
@@ -93,9 +94,15 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def delete_video
+      if user_params[:delete_video] == '1'
+        @user.video.purge  # Delete the video attachment
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :surname, :birthday, :country_id, :region_id, :city_id,
-        :career_start_year,  :has_concert_experience, musical_instrument_ids: [], genre_ids: [])
+        :career_start_year,  :has_concert_experience, :video, :delete_video, musical_instrument_ids: [], genre_ids: [])
     end
 end
