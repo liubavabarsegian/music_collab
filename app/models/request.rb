@@ -6,6 +6,13 @@ class Request < ApplicationRecord
     cancelled:  'cancelled'
   }
 
+  STATUSES_RU = {
+    pending:    'в ожидании',
+    accepted:   'принято',
+    denied:     'отклонено',
+    cancelled:  'отменено'
+  }
+
   validates_inclusion_of :status, in: STATUSES.values, allow_nil: true
 
   belongs_to :group

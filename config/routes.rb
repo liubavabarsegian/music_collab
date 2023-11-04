@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :groups
+  resources :invitations, only: [:index, :destroy]
+  resources :requests, only: [:index, :destroy]
 
   # Defines the root path route ("/")
   root  'home#index'

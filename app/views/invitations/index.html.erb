@@ -1,0 +1,36 @@
+<!-- app/views/invitations/index.html.erb -->
+
+<h1>Приглашения</h1>
+
+<h2>Отправленные мне</h2>
+<% if @invitations_for_me.any? %>
+  <ul>
+    <% @invitations_for_me&.each do |invitation| %>
+      <li>
+        Группа: <%= link_to invitation.group.name, group_path(invitation.group_id) %>
+        Статус: <%=Invitation::STATUSES_RU[invitation.status&.to_sym]%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Нет отправленных Вам приглашений</p>
+<% end %>
+
+<h2>Отправленные мной</h2>
+<% if @invitations_sent_by_me.any? %>
+  <ul>
+    <% @invitations_sent_by_me.each do |invitation| %>
+      <li>
+        Музыкант: <%= link_to invitation.musician&.name, user_path(invitation.musician_id) %>,
+        Группа: <%= link_to invitation.group.name, group_path(invitation.group_id) %>
+        Статус: <%=Invitation::STATUSES_RU[invitation.status&.to_sym]%>
+
+        <%if invitation.status == Invitation::STATUSES[:pending]%>
+            <%= button_to 'Отменить приглашение', invitation_path({id: invitation.id}), method: :delete %>
+        <%end%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Нет отправленных Вами приглашений.</p>
+<% end %>

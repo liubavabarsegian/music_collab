@@ -1,6 +1,11 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :accept, :deny]
 
+  def index
+    @requests_to_my_groups = Request.where(group_id: current_user.leading_groups.ids)
+    @requests_by_me = Request.where(musician_id: current_user.id)
+  end
+
   def show
   end
 

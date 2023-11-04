@@ -35,7 +35,14 @@
   <p>Состав:</p>
   <ul>
     <% group.memberships.each do |membership| %>
-      <li><%= membership.musician.name %> - <%= membership.instrument.name%></li>
+      <li>
+        <%= membership.instrument.name%>
+        <% if membership.group.leader_id == current_user.id || current_user.groups.include?(membership.group)%>
+          <p>
+            <%= membership.musician.name %> - <%= membership.musician.email%>, <%= membership.musician.phone_number%>
+          <p>
+        <%end%>
+      </li>
     <% end %>
   </ul>
 

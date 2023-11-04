@@ -1,0 +1,35 @@
+<!-- app/views/requests/index.html.erb -->
+
+<h1>Запросы на вступление</h1>
+<h2>Отправленные в мои группы</h2>
+<% if @reqests_to_my_groups.present? %>
+  <ul>
+    <% @reqests_to_my_groups.each do |request| %>
+      <li>
+        Музыкант: <%= link_to request.musician&.name, user_path(request.musician_id) %>,
+        Группа: <%= link_to request.group.name, group_path(request.group_id) %>
+        Статус: <%=Request::STATUSES_RU[request.status&.to_sym]%>
+
+        <%if request.status == request::STATUSES[:pending]%>
+            <%= button_to 'Отменить приглашение', request_path({id: request.id}), method: :delete %>
+        <%end%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Нет запросов на вступление в Ваши группы.</p>
+<% end %>
+
+<h2>Отправленные мной</h2>
+<% if @requests_by_me.any? %>
+  <ul>
+    <% @requests_by_me&.each do |request| %>
+      <li>
+        Группа: <%= link_to request.group.name, group_path(request.group_id) %>
+        Статус: <%=Request::STATUSES_RU[request.status&.to_sym]%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Нет отправленных Вам приглашений</p>
+<% end %>
