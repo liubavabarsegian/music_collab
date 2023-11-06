@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   post  'requests/deny'
   get   'requests/accepted'
   get   'requests/denied'
+  post  '/leave_group', to: 'groups#leave_group'
 end

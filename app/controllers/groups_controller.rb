@@ -112,6 +112,12 @@ class GroupsController < ApplicationController
     redirect_to group_path(user_to_group_params[:group_id])
   end
 
+  def leave_group
+    GroupMembership.find_by(leave_group_params)&.delete
+
+    redirect_to groups_path(user_id: current_user.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
@@ -138,6 +144,10 @@ class GroupsController < ApplicationController
 
     def user_to_group_params
       params.permit(:group_id, :musician_id, :token)
+    end
+
+    def leave_group_params
+      params.permit(:group_id, :musician_id)
     end
 
     def leader_instrument_id

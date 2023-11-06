@@ -48,11 +48,14 @@
 
 <p>
   <%is_member = GroupMembership.where(group_id: group.id, musician_id: current_user.id).present? %>
-  <% if user_signed_in? && !is_member %>
+  <% if user_signed_in? && !is_member && group.leader_id != current_user.id%>
     <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
   <%elsif is_member%>
     <p><b>Вы являетесь участником этой группы</b></p>
-  <%else%>
+    <%=button_to 'Выйти из группы', leave_group_path(group_id: group.id, musician_id: current_user.id), class: 'btn btn-dark'%>
+  <%end%>
+
+  <%if current_user.blank?%>
     <%= link_to 'Вступить в группу', new_user_session_path, method: :get%>
   <%end%>
 </p>
