@@ -2,7 +2,7 @@ class RequestsMailer < ApplicationMailer
   default from: "musicolllab@gmail.com"
   layout false
 
-  def  send_request(request)
+  def send_request(request)
     @request = request
     @group = request.group
     @musician = request.musician

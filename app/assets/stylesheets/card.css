@@ -1,5 +1,6 @@
 #groups, #users, #leading-groups {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .user, .group {
@@ -10,12 +11,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 10px;
-    height: 600px;
+    height: 500px;
     width: calc(25% - 20px);
     /* text-align: center; */
     transition: transform 0.2s;
 }
-  
+ 
+.user {
+    height: 600px;
+}
+
 .user:hover, .group:hover {
     transform: scale(1.05);
 }
