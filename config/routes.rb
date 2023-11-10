@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get   'welcome/index'
 
   post  '/add_instrument_requirement', to: 'groups#add_instrument_requirement'
-  post  '/add_user_to_group', to: 'groups#add_user_to_group', as: 'add_user_to_group'
+  post  'invitations/add_user_to_group'
+  post  'requests/add_user_to_group'
   post  '/send_invitation_mail', to: 'invitations#send_invitation_mail'
   get   '/join_group', to: 'invitations#join_group'
   get   'requests/show'

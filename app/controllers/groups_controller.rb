@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :validate_user_pressence, except: [:index]
+  before_action :validate_user_pressence, except: [:index, :leave_group]
   before_action :set_group, only: %i[ show edit update destroy ]
   before_action :validate_group_leader, only: [:edit, :update, :destroy]
   before_action :set_leader, only: [:create]
@@ -9,8 +9,6 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
 
-    #TODO: надо создать какую-нибудь зависимость между группами и инструментами.
-    # например, инструмент <-> необходимое кол-во музыкантов, играющих на нем
     if params[:musical_instrument_id].present?
       @groups = @groups.joins(:group_instrument_requirements).where("group_instrument_requirements.instrument_id = ?", params[:musical_instrument_id])
     end
@@ -74,6 +72,7 @@ class GroupsController < ApplicationController
       if @group.update(group_params)
         delete_instrument_requirements
         create_instrument_requirements
+        set_leader_as_musician
 
         format.html { redirect_to group_url(@group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
@@ -101,17 +100,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  def add_user_to_group
-    GroupMembership.create!(
-      group_id: user_to_group_params[:group_id],
-      musician_id: user_to_group_params[:musician_id],
-      instrument_id:  user_to_group_params[:instrument_id]
-    )
-
-    flash[:notice] = 'Пользователь был успешно добавлен в группу'
-    redirect_to group_path(user_to_group_params[:group_id])
-  end
-
   def leave_group
     GroupMembership.find_by(leave_group_params)&.delete
 
@@ -125,7 +113,7 @@ class GroupsController < ApplicationController
     end
 
     def validate_group_leader
-      redirect_to root_path unless @group.leader_id != current_user.id
+      redirect_to root_path if @group.leader_id != current_user.id
     end
 
     def set_leader
@@ -151,7 +139,7 @@ class GroupsController < ApplicationController
     end
 
     def leader_instrument_id
-      params.permit(:leader_instrument_id)
+      params[:group][:leader_instrument_id]
     end
 
     def create_instrument_requirements
@@ -174,9 +162,14 @@ class GroupsController < ApplicationController
 
     def set_leader_as_musician
       if leader_instrument_id.present?
+        leader_instrument = GroupMembership.find_by(group_id: @group.id, musician_id: current_user.id)
+        return if leader_instrument&.instrument_id == leader_instrument_id
+
+        leader_instrument.delete if leader_instrument
+
         GroupMembership.create!(
           group_id: @group.id,
-          instrument_id: MusicalInstrument.find(leader_instrument_id),
+          instrument_id: leader_instrument_id,
           musician_id: current_user.id
         )
       end

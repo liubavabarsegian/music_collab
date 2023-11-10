@@ -1,6 +1,6 @@
 <h1> Вы были приглашены в группу <%= @group.name %></h1>
 <p> Для вступления в группу нужно перейти по ссылке, но сперва ознакомьтесь с группой и выберите инструмент, на котором вы хотели бы играть в группе</p>
-<%= form_with(url: '/add_user_to_group', method: "post") do |form| %>
+<%= form_with(url: invitations_add_user_to_group_path, method: "post") do |form| %>
   <div class="form-container">
     <div>
       <%= form.collection_select(:instrument_id, current_user.musical_instruments, :id, :name, { include_hidden: false, prompt: '' }, multiple: false) %>
@@ -8,7 +8,7 @@
     </div>
     <%= form.hidden_field :musician_id, value: @musician.id %>
     <%= form.hidden_field :group_id, value: @group.id %>
+    <%= form.hidden_field :id, value: @invitation.id%>
     <%= form.submit "Принять приглашение" %>
   </div>
 <% end %>
-

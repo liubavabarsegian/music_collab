@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
       status: 'pending'
     )
 
-    RequestToGroupMailer.send_request(request).deliver
+    RequestsMailer.send_request(request).deliver
     redirect_to group_path(request_params[:group_id])
   end
 
@@ -34,6 +34,7 @@ class RequestsController < ApplicationController
       instrument_id: @request.instrument_id
     )
 
+    RequestsMailer.accept(@request).deliver
     flash[:notice] = 'Пользователь был успешно добавлен в группу'
     redirect_to group_path(@request.group_id)
   end
@@ -41,8 +42,19 @@ class RequestsController < ApplicationController
   def deny
     @request.update({status: 'denied'})
 
+    RequestsMailer.deny(@request).deliver
     flash[:notice] = 'Пользователю было отказано в запросе на вступление в группу'
     redirect_to group_path(@request.group_id)
+  end
+
+  def add_user_to_group
+    GroupMembership.create!(
+      group_id: user_to_group_params[:group_id],
+      musician_id: user_to_group_params[:musician_id],
+      instrument_id:  user_to_group_params[:instrument_id]
+    )
+
+    redirect_to group_path(user_to_group_params[:group_id])
   end
 
   private
