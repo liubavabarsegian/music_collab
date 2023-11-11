@@ -37,7 +37,7 @@
     <% group.memberships.each do |membership| %>
       <li>
         <%= membership.instrument.name%>
-        <% if membership.group.leader_id == current_user.id || current_user.groups.include?(membership.group)%>
+        <% if membership.group.leader_id == current_user&.id || current_user.groups.include?(membership.group)%>
           <p>
             <%= membership.musician.name %> - <%= membership.musician.email%>, <%= membership.musician.phone_number%>
           <p>
@@ -47,12 +47,12 @@
   </ul>
 
 <p>
-  <%is_member = GroupMembership.where(group_id: group.id, musician_id: current_user.id).present? %>
-  <% if user_signed_in? && !is_member && group.leader_id != current_user.id%>
+  <%is_member = GroupMembership.where(group_id: group.id, musician_id: current_user&.id).present? %>
+  <% if user_signed_in? && !is_member && group.leader_id != current_user&.id%>
     <%= link_to 'Вступить в группу', requests_new_path({group_id: group.id}), method: :get%>
-  <%elsif is_member && group.leader_id != current_user.id%>
+  <%elsif is_member && group.leader_id != current_user&.id%>
     <p><b>Вы являетесь участником этой группы</b></p>
-    <%=button_to 'Выйти из группы', leave_group_path(group_id: group.id, musician_id: current_user.id), class: 'btn btn-dark'%>
+    <%=button_to 'Выйти из группы', leave_group_path(group_id: group.id, musician_id: current_user&.id), class: 'btn btn-dark'%>
   <%end%>
 
   <%if current_user.blank?%>

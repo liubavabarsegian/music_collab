@@ -78,7 +78,7 @@
         <p>
           <%= link_to "Посмотреть этого пользователя", user %>
         </p>
-        <%if user_signed_in? && current_user.id != user.id%>
+        <%if user_signed_in? && current_user&.id != user.id%>
           <div class="dropdown">
             <button class="dropbtn" for="btnControl">Пригласить в группу</button>
             <div class="dropdown-content">

@@ -3,12 +3,12 @@
 <%= render @group %>
 
 <div>
-  <%if current_user.id == @group.leader_id%>
+  <%if current_user&.id == @group.leader_id%>
     <%= link_to "Редактировать группу", edit_group_path(@group) %> |
   <%end%>
   <%= link_to "Вернуться к просмотру групп", groups_path %>
 
-  <%if current_user.id == @group.leader_id%>
+  <%if current_user&.id == @group.leader_id%>
     <%= button_to "Расформировать группу", @group, method: :delete, data: { confirm: "Подтвердите расформирование группы", turbo_confirm: "Подтвердите удаление аккаунта" }, class: 'btn btn-dark' %>
   <%end%>
 </div>
