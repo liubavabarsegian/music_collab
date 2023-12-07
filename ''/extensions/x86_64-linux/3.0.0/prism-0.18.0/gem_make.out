@@ -1,0 +1,27 @@
+current directory: /home/liubava/Desktop/music_collab/''/gems/prism-0.18.0/ext/prism
+/usr/bin/ruby3.0 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20231207-50233-64mu3r.rb extconf.rb
+checking for prism.h in /home/liubava/Desktop/music_collab/''/gems/prism-0.18.0/include... no
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/usr/bin/$(RUBY_BASE_NAME)3.0
+extconf.rb:57:in `<main>': prism.h is required (RuntimeError)
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /home/liubava/Desktop/music_collab/''/extensions/x86_64-linux/3.0.0/prism-0.18.0/mkmf.log
+
+extconf failed, exit code 1

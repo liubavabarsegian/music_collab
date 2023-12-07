@@ -38,17 +38,17 @@
   <% @users.each do |user| %>
     <div id="<%= dom_id user %>" class = "user">
         <p>
-          <strong>Имя:</strong>
+          Имя:
           <%= user.name %>
         </p>
 
         <p>
-          <strong>Фамилия:</strong>
+          Фамилия:
           <%= user.surname %>
         </p>
 
         <p>
-          <strong>Музыкальные инструменты</strong>
+          Музыкальные инструменты:
           <ul>
             <% user.musical_instruments.each do |instrument| %>
               <li><%= instrument.name %></li>
@@ -57,7 +57,7 @@
         </p>
 
         <p>
-          <strong>Музыкальные жанры</strong>
+          Музыкальные жанры:
           <ul>
             <% user.genres.each do |genre| %>
               <li><%= genre.name %></li>
@@ -66,12 +66,12 @@
         </p>
 
         <p>
-          <strong>Имеется концертный опыт</strong>
+          Имеется концертный опыт:
           <%= user.has_concert_experience ? 'Да' : 'Нет' %>
         </p>
 
         <p>
-          <strong>Год начала концертной карьеры</strong>
+          Год начала концертной карьеры:
           <%= user.career_start_year %>
         </p>
 

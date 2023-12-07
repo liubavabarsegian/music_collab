@@ -1,19 +1,15 @@
-.btn
-{
-    margin: 50px 10px;
-}
-
-.glow-on-hover {
+.glow-on-hover.btn {
     width: 160px;
     height: 60px;
     border: none;
     outline: none;
-    color: #fff;
+    color: #d0e1f9 !important;
     background: #111;
     cursor: pointer;
     position: relative;
     z-index: 0;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .glow-on-hover:before {

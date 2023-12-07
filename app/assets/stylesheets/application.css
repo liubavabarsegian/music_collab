@@ -43,3 +43,28 @@ button[type="submit"]:hover, button:hover
 {
     text-decoration: none;
 }
+
+body
+{
+    background-color: #d0e1f9 !important;
+}
+
+.navbar
+{
+    background-color: #1e1f26;
+}
+
+
+a.navbar-brand {
+    color: #d0e1f9 !important;
+}
+
+.main-links a, .nav-item.white a
+{
+    color:  #d0e1f9 !important;
+}
+
+body a
+{
+    color: #1e1f26 !important;
+}

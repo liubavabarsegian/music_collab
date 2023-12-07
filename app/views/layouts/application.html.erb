@@ -17,25 +17,21 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-xl">
       <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="<%= asset_path('app_icon.png')%>" style="height:50px"></a>
-        <a class="navbar-brand" href="/">Music Collab</a>
+        <div class="tytle"><a class="navbar-brand " href="/">Music Collab</a></div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav main-links">
             <li class="nav-item">
               <a class="nav-link" href="/groups">Найти группу</a>
             </li>
             <li class="nav-item" style="display:flex;">
               <a class="nav-link" href="/users">Найти музыканта</a>
-              <%# <%@requests = requests%>
-              <%#<%if !@requests.empty?%>
-              <%#  <img src="<%=asset_path('bell.png')%>" id = "red_bell">
-              <%#<%end%> 
             </li>
           </ul> 
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -59,10 +55,10 @@
                     </ul>
                   </li>
                   <%else%>
-                    <li class="nav-item">
+                    <li class="nav-item white">
                       <a class="nav-link" href="<%=new_user_session_path%>">Вход</a></i>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item white">
                       <a class="nav-link" href="<%=new_user_registration_path%>">Регистрация</a></i>
                     </li>
                 <%end%>

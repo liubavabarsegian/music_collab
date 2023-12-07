@@ -36,13 +36,13 @@
   }
   
   .form-section select:focus, .form-section input[type="text"]:focus {
-    border-color: #007bff; /* Change to your preferred focus color */
+    border-color: #4d648d; /* Change to your preferred focus color */
     background-image: none;
   }
   
   /* Style the submit button */
   .form-section input[type="submit"] {
-    background-color: #007bff;
+    background-color:#4d648d;
     color: white;
     border: none;
     border-radius: 4px;
@@ -54,7 +54,7 @@
   }
   
   .form-section input[type="submit"]:hover {
-    background-color: #0056b3; /* Change to your preferred hover color */
+    background-color: #283655; /* Change to your preferred hover color */
     background-image: none;
   }
   
@@ -78,6 +78,6 @@
   }
   
   .clear-button:hover {
-    background-color: #92b0c2; /* Button background color on hover */
+    background-color: 	#93a3c4; /* Button background color on hover */
     background-image: none;
   }

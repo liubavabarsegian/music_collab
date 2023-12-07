@@ -4,9 +4,9 @@
 }
 
 .user, .group {
-    background: rgb(184, 208, 233);
-    color: rgb(14, 14, 52);
-    border: 2px solid #2f4986;
+    background: #4d648d;
+    color: rgb(255, 255, 255);
+    /* border: 2px solid #2f4986; */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -23,4 +23,28 @@
 
 .user:hover, .group:hover {
     transform: scale(1.05);
+}
+
+
+.show-container
+{
+    display: flex;
+    justify-content: center;
+}
+
+.show-card
+{
+    background: #4d648d;
+    color: rgb(14, 14, 52);
+    /* border: 2px solid #2f4986; */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    height: 100%;
+    width: auto;
+    /* text-align: center; */
+    transition: transform 0.2s;
+    align-self: center;
+    display: block;
 }
